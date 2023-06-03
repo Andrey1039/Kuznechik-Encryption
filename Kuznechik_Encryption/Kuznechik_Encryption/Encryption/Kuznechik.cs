@@ -11,16 +11,14 @@ namespace Kuznechik_Encryption.Encryption
         private byte GF_Mul(byte a, byte b)
         {
             byte p = 0;
-            byte counter;
-            byte hi_bit_set;
 
-            for (counter = 0; counter < 8 && a != 0 && b != 0; counter++)
+            for (byte counter = 0; counter < 8 && a != 0 && b != 0; counter++)
             {
                 if ((b & 1) != 0)
                     p ^= a;
 
-                hi_bit_set = (byte)(a & 0x80);
-                a <<= 1;
+                byte hi_bit_set = (byte)(a & 0x80);
+                a = (byte)((a << 1) & 0xff);
 
                 if (hi_bit_set != 0)
                     a ^= 0xc3;
